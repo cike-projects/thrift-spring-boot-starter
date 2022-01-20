@@ -1,3 +1,9 @@
-# thrift-spring-boot-starter
+# Thrift Spring Boot Starter
 
-Spring Boot starter module for gRPC framework.
+Spring Boot starter module for Thrift framework.
+
+## 特性
+
+
+## 版本
+

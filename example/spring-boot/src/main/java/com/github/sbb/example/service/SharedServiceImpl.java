@@ -6,14 +6,20 @@ import com.github.sbb.example.shared.SharedService;
 import com.github.sbb.example.shared.SharedStruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @ThriftService
 @Component
+@RestController
+@RequestMapping("Shared")
 public class SharedServiceImpl implements SharedService.Iface {
 
   @Autowired
   private RandomComponent randomComponent;
 
+  @GetMapping("getStruct")
   @Override
   public SharedStruct getStruct(int key) {
     return new SharedStruct(key, randomComponent.randomString(key));

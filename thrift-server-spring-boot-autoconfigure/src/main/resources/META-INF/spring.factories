@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.github.sbb.boot.thrift.server.autoconfigure.ThriftServerAutoConfiguration
+  com.github.sbb.boot.thrift.server.autoconfigure.ThriftServerAutoConfiguration,\
+  com.github.sbb.boot.thrift.server.autoconfigure.ThriftCloudMetadataAutoConfiguration

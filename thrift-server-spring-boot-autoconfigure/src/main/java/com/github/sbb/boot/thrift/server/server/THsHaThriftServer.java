@@ -1,6 +1,9 @@
-package com.github.sbb.boot.thrift.server;
+package com.github.sbb.boot.thrift.server.server;
 
-import java.util.concurrent.TimeUnit;
+import com.github.sbb.boot.thrift.server.ThriftServer;
+import com.github.sbb.boot.thrift.server.ThriftServiceDefinition;
+import com.github.sbb.boot.thrift.server.ThriftServiceDiscoverer;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.thrift.TMultiplexedProcessor;
 import org.apache.thrift.TProcessorFactory;
 import org.apache.thrift.protocol.TCompactProtocol;
@@ -9,13 +12,18 @@ import org.apache.thrift.transport.TFramedTransport;
 import org.apache.thrift.transport.TNonblockingServerSocket;
 import org.apache.thrift.transport.TTransportException;
 
-public class THsHaServer extends Server {
+@Slf4j
+public class THsHaThriftServer extends ThriftServer {
+
+  private TServer server;
+
+  public THsHaThriftServer(int port, ThriftServiceDiscoverer serviceDiscoverer) {
+    super(port, serviceDiscoverer);
+  }
 
   @Override
-  public Server start() throws TTransportException {
-    //设置服务器端口  TNonblockingServerSocket-非堵塞服务模型
-    TNonblockingServerSocket serverSocket = new TNonblockingServerSocket(8899);
-    //参数设置
+  public void start() throws TTransportException {
+    TNonblockingServerSocket serverSocket = new TNonblockingServerSocket(getPort());
     org.apache.thrift.server.THsHaServer.Args arg = new org.apache.thrift.server.THsHaServer.Args(
         serverSocket).minWorkerThreads(2).maxWorkerThreads(4);
 
@@ -23,53 +31,33 @@ public class THsHaServer extends Server {
 
     for (ThriftServiceDefinition serviceDefinition : getImmutableServices()) {
       // multiplexedProcessor.registerProcessor();
-
     }
 
-
-
-
-    //处理器
     arg.protocolFactory(new TCompactProtocol.Factory());
     arg.transportFactory(new TFramedTransport.Factory());
     arg.processorFactory(new TProcessorFactory(multiplexedProcessor));
+    server = new org.apache.thrift.server.THsHaServer(arg);
 
     Thread serverThread = new Thread(() -> {
-      TServer server = new org.apache.thrift.server.THsHaServer(arg);
-      System.out.println("Thrift 服务端启动成功");
       server.serve();
     });
-
+    serverThread.setDaemon(true);
     serverThread.start();
+    log.info("Thrift 服务端启动成功");
   }
 
   @Override
-  public Server shutdown() {
-    return null;
+  public void shutdown() {
+    server.setShouldStop(true);
   }
 
   @Override
-  public Server shutdownNow() {
-    return null;
+  public void shutdownNow() {
+    server.stop();
   }
 
   @Override
-  public boolean isShutdown() {
-    return false;
-  }
-
-  @Override
-  public boolean isTerminated() {
-    return false;
-  }
-
-  @Override
-  public boolean awaitTermination(long timeout, TimeUnit unit) throws InterruptedException {
-    return false;
-  }
-
-  @Override
-  public void awaitTermination() throws InterruptedException {
-
+  public boolean isRunning() {
+    return server != null && server.isServing();
   }
 }

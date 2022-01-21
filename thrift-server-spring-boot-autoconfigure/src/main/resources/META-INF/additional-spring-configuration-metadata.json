@@ -1,0 +1,34 @@
+{
+  "groups": [
+    {
+      "name": "thrift.server",
+      "type": "com.github.sbb.boot.thrift.server.autoconfigure.ThriftServerProperties",
+      "sourceType": "com.github.sbb.boot.thrift.server.autoconfigure.ThriftServerProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "thrift.server.port",
+      "type": "java.lang.Integer",
+      "description": "server port.",
+      "defaultValue": 10109
+    },
+    {
+      "name": "thrift.server.serverMode",
+      "type": "java.lang.String",
+      "description": "serverMode.",
+      "defaultValue": "THsHaServer"
+    }
+  ],
+  "hints": [
+    {
+      "name": "thrift.server.serverMode",
+      "values": [
+        {
+          "value": "THsHaServer",
+          "description": "THsHaServer."
+        }
+      ]
+    }
+  ]
+}

@@ -30,6 +30,7 @@ public class THsHaThriftServer extends ThriftServer {
     TMultiplexedProcessor multiplexedProcessor = new TMultiplexedProcessor();
 
     for (ThriftServiceDefinition serviceDefinition : getImmutableServices()) {
+      // TODO 这里需要搞一下 multiplexedProcessor
       // multiplexedProcessor.registerProcessor();
     }
 
@@ -43,7 +44,7 @@ public class THsHaThriftServer extends ThriftServer {
     });
     serverThread.setDaemon(true);
     serverThread.start();
-    log.info("Thrift 服务端启动成功");
+    log.info("Thrift Starting [\"THsHaServer-{}\"]", getPort());
   }
 
   @Override

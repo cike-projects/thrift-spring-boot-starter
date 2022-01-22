@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "thrift.server",
+      "type": "com.github.sbb.boot.thrift.client.config.ThriftClientProperties",
+      "sourceType": "com.github.sbb.boot.thrift.client.config.ThriftClientProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "thrift.client.loadBalance.enabled",
+      "type": "java.lang.Boolean",
+      "description": "load balance enabled.",
+      "defaultValue": false
+    }
+  ]
+}

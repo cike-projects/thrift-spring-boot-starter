@@ -8,6 +8,8 @@
     <module>example</module>
     <module>thrift-server-spring-boot-starter</module>
     <module>thrift-server-spring-boot-autoconfigure</module>
+    <module>thrift-client-spring-boot-autoconfigure</module>
+    <module>thrift-client-spring-boot-starter</module>
   </modules>
 
   <groupId>com.github.some-big-bugs</groupId>
@@ -25,14 +27,12 @@
 
   <dependencyManagement>
     <dependencies>
-
       <!-- https://mvnrepository.com/artifact/org.apache.thrift/libthrift -->
       <dependency>
         <groupId>org.apache.thrift</groupId>
         <artifactId>libthrift</artifactId>
         <version>${org.apache.thrift.libthrift.version}</version>
       </dependency>
-
 
       <dependency>
         <groupId>com.github.some-big-bugs</groupId>
@@ -43,6 +43,18 @@
       <dependency>
         <groupId>com.github.some-big-bugs</groupId>
         <artifactId>thrift-server-spring-boot-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.github.some-big-bugs</groupId>
+        <artifactId>thrift-client-spring-boot-autoconfigure</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.github.some-big-bugs</groupId>
+        <artifactId>thrift-client-spring-boot-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
 

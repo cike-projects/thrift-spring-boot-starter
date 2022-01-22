@@ -1,6 +1,10 @@
 server:
   port: 9999
 
+spring:
+  application:
+    name: spring-boot-thrift-server
+
 thrift:
   server:
     port: 10109

@@ -1,5 +1,10 @@
 server:
-  port: 18888
+  port: 9999
+
+thrift:
+  server:
+    port: 10109
+    serverMode: THsHaServer
 
 logging:
   config: classpath:logback-spring-dev.xml

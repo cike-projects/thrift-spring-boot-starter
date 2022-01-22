@@ -3,6 +3,7 @@ package com.github.sbb.boot.thrift.server.autoconfigure;
 import com.github.sbb.boot.thrift.server.ThriftServer;
 import com.github.sbb.boot.thrift.server.ThriftServiceDiscoverer;
 import com.github.sbb.boot.thrift.server.server.THsHaThriftServer;
+import com.github.sbb.boot.thrift.server.server.TSimpleThriftServer;
 
 public class ThriftServerSelector {
 
@@ -25,7 +26,10 @@ public class ThriftServerSelector {
         thriftServer = new THsHaThriftServer(thriftServerProperties.getPort(), thriftServiceDiscoverer);
         break;
       case "TNonblockingServer":
+        break;
       case "TSimpleServer":
+        thriftServer = new TSimpleThriftServer(thriftServerProperties.getPort(), thriftServiceDiscoverer);
+        break;
       case "TThreadPoolServer":
       case "TThreadedSelectorServer":
         break;

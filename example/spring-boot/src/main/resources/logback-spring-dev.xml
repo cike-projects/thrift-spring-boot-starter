@@ -11,7 +11,7 @@
   <logger name="org.apache.kafka" level="WARN"/>
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
-      <pattern>%date %level [%thread] [%X{LOG_NO}] %logger{100} [%file:%line] %msg%n</pattern>
+      <pattern>%date %level [%thread] %logger{100} [%file:%line] %msg%n</pattern>
       <charset>UTF-8</charset>
     </encoder>
   </appender>

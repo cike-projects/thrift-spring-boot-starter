@@ -19,16 +19,5 @@
       "description": "serverMode.",
       "defaultValue": "THsHaServer"
     }
-  ],
-  "hints": [
-    {
-      "name": "thrift.server.serverMode",
-      "values": [
-        {
-          "value": "THsHaServer",
-          "description": "THsHaServer."
-        }
-      ]
-    }
   ]
 }

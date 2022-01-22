@@ -1,7 +1,6 @@
 package com.github.sbb.boot.thrift.server.server;
 
 import com.github.sbb.boot.thrift.server.ThriftServer;
-import com.github.sbb.boot.thrift.server.ThriftServiceDefinition;
 import com.github.sbb.boot.thrift.server.ThriftServiceDiscoverer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.thrift.TMultiplexedProcessor;
@@ -27,12 +26,7 @@ public class THsHaThriftServer extends ThriftServer {
     org.apache.thrift.server.THsHaServer.Args arg = new org.apache.thrift.server.THsHaServer.Args(
         serverSocket).minWorkerThreads(2).maxWorkerThreads(4);
 
-    TMultiplexedProcessor multiplexedProcessor = new TMultiplexedProcessor();
-
-    for (ThriftServiceDefinition serviceDefinition : getImmutableServices()) {
-      // TODO 这里需要搞一下 multiplexedProcessor
-      // multiplexedProcessor.registerProcessor();
-    }
+    TMultiplexedProcessor multiplexedProcessor = build(getImmutableServices());
 
     arg.protocolFactory(new TCompactProtocol.Factory());
     arg.transportFactory(new TFramedTransport.Factory());

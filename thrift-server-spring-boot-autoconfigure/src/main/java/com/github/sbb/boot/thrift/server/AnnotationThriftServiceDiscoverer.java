@@ -33,7 +33,8 @@ public class AnnotationThriftServiceDiscoverer implements ApplicationContextAwar
     return Arrays.stream(beanNames).distinct().map(beanName -> {
       Object bean = applicationContext.getBean(beanName);
       ThriftService thriftService = bean.getClass().getAnnotation(ThriftService.class);
-      String thriftServiceName = StringUtils.isEmpty(thriftService.value()) ? beanName : thriftService.value();
+      String thriftServiceName =
+          StringUtils.isEmpty(thriftService.value()) ? bean.getClass().getName() : thriftService.value();
       return new ThriftServiceDefinition(thriftServiceName, bean);
     }).collect(Collectors.toList());
   }

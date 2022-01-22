@@ -167,7 +167,6 @@ public class SharedServiceImpl implements SharedService.Iface {
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::        (v2.3.7.RELEASE)
 
-2022-01-22 16:11:50,490 INFO [main] com.github.sbb.example.ThriftExampleAppApplication [StartupInfoLogger.java:55] Starting ThriftExampleAppApplication on bogon with PID 40721 (/Users/zhangyunan/project/some-big-bugs/thrift-spring-boot-starter/example/spring-boot/target/classes started by zhangyunan in /Users/zhangyunan/project/some-big-bugs/thrift-spring-boot-starter)
 2022-01-22 16:11:50,493 DEBUG [main] com.github.sbb.example.ThriftExampleAppApplication [StartupInfoLogger.java:56] Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
 2022-01-22 16:11:50,493 INFO [main] com.github.sbb.example.ThriftExampleAppApplication [SpringApplication.java:651] No active profile set, falling back to default profiles: default
 2022-01-22 16:11:51,264 INFO [main] org.apache.coyote.http11.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-9999"]

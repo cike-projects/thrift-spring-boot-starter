@@ -8,8 +8,9 @@ Spring Boot starter module for Thrift framework.
 
 **服务端：**
 
-1. 支持 `Apache Thrift` 的各种原生服务线程模型，包括单线程阻塞模型(`simple`)、单线程非阻塞模型(`nonBlocking`)、线程池阻塞模型(`threadPool`)、半同步半异步模型(`hsHa`)
-   和半同步半异步线程选择器模型(`threadedSelector`)。
+1. 支持 `Apache Thrift` 的各种原生服务线程模型，包括单线程阻塞模型(`TSimpleServer`)、单线程非阻塞模型(`TNonblockingServer`)、线程池阻塞模型(`TThreadPoolServer`)
+   、半同步半异步模型(`THsHaServer`)
+   和半同步半异步线程选择器模型(`TThreadedSelectorServer`)。
 
 **客户端：**
 

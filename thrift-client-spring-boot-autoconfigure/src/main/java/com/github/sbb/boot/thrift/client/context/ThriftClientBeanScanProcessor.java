@@ -23,7 +23,7 @@ public class ThriftClientBeanScanProcessor implements ApplicationContextAware, B
   @Override
   public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
     BeanDefinitionRegistry definitionRegistry = (BeanDefinitionRegistry) beanFactory;
-    ClassPathMapperScanner beanScanner = new ClassPathMapperScanner(definitionRegistry);
+    ClassPathThriftClientScanner beanScanner = new ClassPathThriftClientScanner(definitionRegistry);
     beanScanner.setResourceLoader(applicationContext);
     beanScanner.setBeanNameGenerator(new AnnotationBeanNameGenerator());
     beanScanner.setScopedProxyMode(ScopedProxyMode.INTERFACES);

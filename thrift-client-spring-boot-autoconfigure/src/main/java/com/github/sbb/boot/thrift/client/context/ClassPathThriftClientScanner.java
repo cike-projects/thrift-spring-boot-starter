@@ -15,9 +15,9 @@ import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 
 @Slf4j
-public class ClassPathMapperScanner extends ClassPathBeanDefinitionScanner {
+public class ClassPathThriftClientScanner extends ClassPathBeanDefinitionScanner {
 
-  public ClassPathMapperScanner(BeanDefinitionRegistry registry) {
+  public ClassPathThriftClientScanner(BeanDefinitionRegistry registry) {
     super(registry);
   }
 

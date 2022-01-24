@@ -1,10 +1,8 @@
 package com.github.sbb.boot.thrift.client.context;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Proxy;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.thrift.TServiceClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.FactoryBean;
@@ -20,13 +18,7 @@ public class ThriftClientFactoryBean<T> implements FactoryBean<T>, InitializingB
 
   private Class<?> beanClass;
 
-  private String serviceName;
-
   private String serviceId;
-
-  private Class<?> clientClass;
-
-  private Constructor<? extends TServiceClient> clientConstructor;
 
   @Override
   @SuppressWarnings("unchecked")

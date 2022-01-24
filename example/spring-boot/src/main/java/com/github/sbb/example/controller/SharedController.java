@@ -18,7 +18,7 @@ public class SharedController {
 
   @GetMapping("s")
   public SharedStruct getStruct(int key) throws TException {
-    return sharedClient.client().getStruct(key);
+    return sharedClient.getStruct(key);
   }
 
 }

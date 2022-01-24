@@ -1,5 +1,7 @@
 # Thrift Spring Boot Starter
 
+[![Java CI with Maven](https://github.com/bug-wheels/thrift-spring-boot-starter/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/bug-wheels/thrift-spring-boot-starter/actions/workflows/maven.yml)
+
 Spring Boot starter module for Thrift framework.
 
 ## 简介

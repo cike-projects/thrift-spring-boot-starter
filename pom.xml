@@ -14,7 +14,44 @@
 
   <groupId>io.github.bug-wheels</groupId>
   <artifactId>thrift-spring-boot-starter</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>0.1</version>
+
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+      <comments>A business-friendly OSS license</comments>
+    </license>
+  </licenses>
+
+  <scm>
+    <url>https://github.com/bug-wheels/thrift-spring-boot-starter</url>
+    <connection>https://github.com/bug-wheels/thrift-spring-boot-starter.git</connection>
+  </scm>
+
+  <developers>
+    <developer>
+      <name>zhangyunan</name>
+      <id>zyn</id>
+      <email>zyndev@gmail.com</email>
+      <roles>
+        <role>OWNER</role>
+      </roles>
+      <timezone>+8</timezone>
+    </developer>
+  </developers>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
 
   <properties>
     <maven.compiler.source>8</maven.compiler.source>
@@ -24,6 +61,71 @@
     <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
     <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
   </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6.7</version>
+        <extensions>true</extensions>
+        <configuration>
+          <serverId>ossrh</serverId>
+          <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+          <autoReleaseAfterClose>true</autoReleaseAfterClose>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9.1</version>
+        <configuration>
+          <!-- jdk1.8要加上，1.7要去掉，否则会报错 -->
+          <additionalJOptions>
+            <additionalJOption>-Xdoclint:none</additionalJOption>
+          </additionalJOptions>
+          <javadocExecutable>/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/bin/javadoc
+          </javadocExecutable>
+
+        </configuration>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 
   <dependencyManagement>
     <dependencies>

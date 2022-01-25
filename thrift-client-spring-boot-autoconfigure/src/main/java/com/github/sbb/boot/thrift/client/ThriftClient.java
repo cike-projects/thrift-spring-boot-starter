@@ -14,4 +14,11 @@ public @interface ThriftClient {
   String name() default "";
 
   String serviceId();
+
+  Class<?> fallback() default void.class;
+
+  Class<?> fallbackBean() default void.class;
+
+  String fallbackBeanName() default "";
+
 }

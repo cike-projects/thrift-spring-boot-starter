@@ -28,7 +28,7 @@
             <plugin>
                 <groupId>com.github.zyndev</groupId>
                 <artifactId>thrift-maven-plugin</artifactId>
-                <version>0.1.14-SNAPSHOT</version>
+                <version>0.1.15</version>
                 <configuration>
                     <thriftExecutable>/usr/local/bin/thrift</thriftExecutable>
                     <!--MacOS环境下用次配置-->

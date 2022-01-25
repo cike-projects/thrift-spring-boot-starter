@@ -96,6 +96,25 @@ service Calculator extends shared.SharedService {
 
 }
 ```
+####  Thrift-api的安装
+
+example的demo需要依赖thrift-api模块，模块中提供的是.thrift文件来定义的接口，需要根据使用的语言生成对应的文件。对于Java环境来说，我们需要将thrift-api编译成对应的jar。
+
+这里使用thrift的maven插件进行编译，在pom文件中根据自己的开发环境简单改一下配置：
+
+Windows：
+
+```
+<thriftExecutable>../thrift-api/thrift-0.9.3.exe</thriftExecutable>
+```
+
+MacOs:
+
+```
+<thriftExecutable>/usr/local/bin/thrift</thriftExecutable>
+```
+
+最后使用 ***mvn clean install*** 命令将jar包安装到本地。
 
 ### 服务端程序：
 

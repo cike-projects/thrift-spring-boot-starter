@@ -26,15 +26,16 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.thrift.tools</groupId>
-                <artifactId>maven-thrift-plugin</artifactId>
-                <version>0.1.11</version>
+                <groupId>com.github.zyndev</groupId>
+                <artifactId>thrift-maven-plugin</artifactId>
+                <version>0.1.14-SNAPSHOT</version>
                 <configuration>
-                    <!--Windows环境下用此配置-->
-<!--                    <thriftExecutable>../thrift-api/thrift-0.9.3.exe</thriftExecutable>-->
-                    <!--MacOS环境下用次配置-->
                     <thriftExecutable>/usr/local/bin/thrift</thriftExecutable>
-                    <thriftSourceRoot>../thrift-api/src/main/thrift</thriftSourceRoot>
+                    <!--MacOS环境下用次配置-->
+                    <macThriftExecutable>/usr/local/bin/thrift</macThriftExecutable>
+                    <!--Windows环境下用此配置-->
+                    <winThriftExecutable>./thrift-0.9.3.exe</winThriftExecutable>
+                    <thriftSourceRoot>./src/main/thrift</thriftSourceRoot>
                 </configuration>
                 <executions>
                     <execution>

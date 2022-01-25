@@ -8,17 +8,48 @@ Spring Boot starter module for Thrift framework.
 
 ## 简介
 
-本项目主要为了提高 Thrift 在 Spring Boot 和 Spring Cloud 中的使用体验，简化其配置方式，提供开箱即用的体验，在 Spring Cloud 的环境中提高注册发现和负载均衡功能。个模块。
+本项目主要为了提高 Thrift 在 Spring Boot 和 Spring Cloud 中的使用体验，简化其配置方式，提供开箱即用的体验，在 Spring Cloud 的环境中提供注册发现和负载均衡功能模块。
+
+![apache thrift](./docs/apache thrift.png)
 
 **服务端：**
 
-1. 支持 `Apache Thrift` 的各种原生服务线程模型，包括单线程阻塞模型(`TSimpleServer`)、单线程非阻塞模型(`TNonblockingServer`)、线程池阻塞模型(`TThreadPoolServer`)
-   、半同步半异步模型(`THsHaServer`)
-   和半同步半异步线程选择器模型(`TThreadedSelectorServer`)。
+1. 支持 `Apache Thrift` 的各种原生服务线程模型，包括单线程阻塞模型(`TSimpleServer`)、单线程非阻塞模型(`TNonblockingServer`)、线程池阻塞模型(`TThreadPoolServer`)、半同步半异步模型(`THsHaServer`) 和半同步半异步线程选择器模型(`TThreadedSelectorServer`)；
+1. 可以灵活的配置一些协议和线程模型；
+1. 在 Spring Cloud 环境可以进行服务注册和发现，在 Spring Boot 环境中可以通过 ip 访问；
+1. 使用 `@ThriftService` 注解即可完成 Thrift Handler 的注册管理。其中注解应该是 `Iface` 接口的实现类；
+
+示例代码如下：
+
+```java
+@ThriftService("SharedService")
+public class SharedServiceImpl implements SharedService.Iface {
+
+  @Autowired
+  private RandomComponent randomComponent;
+
+  @Override
+  public SharedStruct getStruct(int key) {
+    return new SharedStruct(key, randomComponent.randomString(key));
+  }
+}
+```
 
 **客户端：**
 
-1.
+1. 支持 Apache Thrift 的各种客户端配置；
+2. 在 Spring Boot 环境中，可以指定 Server 端的 ip + port 进行访问；
+3. 在 Spring Cloud 环境中，可以进行服务发现和负载均衡；
+4. 使用 `@ThriftClient` 注解即可完成 Thrift Client 的注册管理。其中注解应该是 `Iface` 接口的子接口，提供降级功能，用法类似 FeignClient
+
+**示例代码**
+
+```java
+@ThriftClient(name = "SharedService", serviceId = "spring-boot-thrift-server", fallback = SharedClientFallback.class)
+public interface SharedClient extends SharedService.Iface {
+
+}
+```
 
 ## 版本支持
 

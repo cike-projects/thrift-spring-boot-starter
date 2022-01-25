@@ -1,6 +1,6 @@
 include "shared.thrift"
 
-namespace java com.github.sbb.example.tutorial
+namespace java io.github.bw.example.tutorial
 
 typedef i32 MyInteger
 

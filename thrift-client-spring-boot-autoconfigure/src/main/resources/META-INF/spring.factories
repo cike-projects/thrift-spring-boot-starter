@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.github.sbb.boot.thrift.client.autoconfigure.ThriftClientAutoConfiguration
+  io.github.bw.boot.thrift.client.autoconfigure.ThriftClientAutoConfiguration

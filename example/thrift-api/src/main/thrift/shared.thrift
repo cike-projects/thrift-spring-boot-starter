@@ -1,4 +1,4 @@
-namespace java com.github.sbb.example.shared
+namespace java io.github.bw.example.shared
 
 struct SharedStruct {
   1: i32 key

@@ -154,7 +154,7 @@ MacOs:
 ```xml
 
 <dependency>
-  <groupId>com.github.some-big-bugs</groupId>
+  <groupId>io.github.bug-wheels</groupId>
   <artifactId>thrift-server-spring-boot-starter</artifactId>
 </dependency>
 ```

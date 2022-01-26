@@ -15,6 +15,9 @@
   <groupId>io.github.bug-wheels</groupId>
   <artifactId>thrift-spring-boot-starter</artifactId>
   <version>0.1</version>
+  <name>thrift-spring-boot-starter</name>
+  <url>https://github.com/bug-wheels/thrift-spring-boot-starter</url>
+  <description>thrift-spring-boot-starter</description>
 
   <licenses>
     <license>

@@ -9,6 +9,13 @@ thrift:
   server:
     port: 10109
     serverMode: THsHaServer
+  client:
+    loadBalance:
+      enabled: false
+      services:
+        - name: spring-boot-thrift-server
+          address:
+            - 127.0.0.1:10109
 
 logging:
   config: classpath:logback-spring-dev.xml

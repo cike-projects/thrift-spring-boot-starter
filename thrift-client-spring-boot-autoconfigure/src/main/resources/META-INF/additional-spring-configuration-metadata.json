@@ -2,8 +2,8 @@
   "groups": [
     {
       "name": "thrift.server",
-      "type": "com.github.sbb.boot.thrift.client.config.ThriftClientProperties",
-      "sourceType": "com.github.sbb.boot.thrift.client.config.ThriftClientProperties"
+      "type": "io.github.bw.boot.thrift.client.config.ThriftClientProperties",
+      "sourceType": "io.github.bw.boot.thrift.client.config.ThriftClientProperties"
     }
   ],
   "properties": [

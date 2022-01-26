@@ -14,7 +14,7 @@
 
   <groupId>io.github.bug-wheels</groupId>
   <artifactId>thrift-spring-boot-starter</artifactId>
-  <version>0.1</version>
+  <version>0.2-SNAPSHOT</version>
   <name>thrift-spring-boot-starter</name>
   <url>https://github.com/bug-wheels/thrift-spring-boot-starter</url>
   <description>thrift-spring-boot-starter</description>
@@ -38,6 +38,15 @@
       <name>zhangyunan</name>
       <id>zyn</id>
       <email>zyndev@gmail.com</email>
+      <roles>
+        <role>OWNER</role>
+      </roles>
+      <timezone>+8</timezone>
+    </developer>
+    <developer>
+      <name>wangyingjie</name>
+      <id>yesAnd</id>
+      <email>main@mail.com</email>
       <roles>
         <role>OWNER</role>
       </roles>

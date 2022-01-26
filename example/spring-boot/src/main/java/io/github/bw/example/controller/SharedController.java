@@ -1,7 +1,7 @@
-package com.github.sbb.example.controller;
+package io.github.bw.example.controller;
 
-import com.github.sbb.example.client.SharedClient;
-import com.github.sbb.example.shared.SharedStruct;
+import io.github.bw.example.client.SharedClient;
+import io.github.bw.example.shared.SharedStruct;
 import org.apache.thrift.TException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

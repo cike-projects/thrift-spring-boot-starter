@@ -1,4 +1,4 @@
-package com.github.sbb.example.client;
+package io.github.bw.example.client;
 
 public class SharedClientFallback {
 

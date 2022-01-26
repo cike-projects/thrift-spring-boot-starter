@@ -1,9 +1,9 @@
-package com.github.sbb.example.service;
+package io.github.bw.example.service;
 
-import com.github.sbb.example.component.RandomComponent;
-import com.github.sbb.example.shared.SharedService;
-import com.github.sbb.example.shared.SharedStruct;
 import io.github.bw.boot.thrift.server.ThriftService;
+import io.github.bw.example.component.RandomComponent;
+import io.github.bw.example.shared.SharedService;
+import io.github.bw.example.shared.SharedStruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

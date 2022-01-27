@@ -8,10 +8,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
+import org.springframework.beans.factory.config.ConstructorArgumentValues;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 
 @Slf4j
@@ -51,6 +53,12 @@ public class ClassPathThriftClientScanner extends ClassPathBeanDefinitionScanner
 
       ThriftClient thriftClient = AnnotationUtils.findAnnotation(beanClass, ThriftClient.class);
 
+      // 这段代码不能改顺序
+      ConstructorArgumentValues constructorArgumentValues = definition.getConstructorArgumentValues();
+      constructorArgumentValues.addGenericArgumentValue(thriftClient.serviceId());
+      constructorArgumentValues.addGenericArgumentValue(thriftClient.name());
+      constructorArgumentValues.addGenericArgumentValue(beanClass);
+
       definition.getPropertyValues().addPropertyValue("beanClass", beanClass);
       definition.getPropertyValues().addPropertyValue("serviceName", thriftClient.name());
       definition.getPropertyValues().addPropertyValue("serviceId", thriftClient.serviceId());
@@ -60,7 +68,10 @@ public class ClassPathThriftClientScanner extends ClassPathBeanDefinitionScanner
 
   @Override
   protected boolean isCandidateComponent(AnnotatedBeanDefinition beanDefinition) {
-    return beanDefinition.getMetadata().isInterface() && beanDefinition.getMetadata().isIndependent();
+    AnnotationMetadata metadata = beanDefinition.getMetadata();
+    return metadata.isInterface()
+        && metadata.hasAnnotation(ThriftClient.class.getName())
+        && Arrays.stream(metadata.getInterfaceNames()).anyMatch(it -> it.endsWith("face"));
   }
 
   /**

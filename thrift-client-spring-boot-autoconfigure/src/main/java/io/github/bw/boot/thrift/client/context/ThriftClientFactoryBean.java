@@ -6,25 +6,29 @@ import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.FactoryBean;
-import org.springframework.beans.factory.InitializingBean;
 
 @Setter
 @Getter
-public class ThriftClientFactoryBean<T> implements FactoryBean<T>, InitializingBean {
+public class ThriftClientFactoryBean<T> implements FactoryBean<T> {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(ThriftClientFactoryBean.class);
-
-  private String beanName;
+  private static final Logger logger = LoggerFactory.getLogger(ThriftClientFactoryBean.class);
 
   private Class<?> beanClass;
 
   private String serviceId;
+  private String serviceName;
+
+  public ThriftClientFactoryBean(String serviceId, String serviceName, Class<?> beanClass) {
+    this.beanClass = beanClass;
+    this.serviceId = serviceId;
+    this.serviceName = serviceName;
+  }
 
   @Override
   @SuppressWarnings("unchecked")
   public T getObject() throws Exception {
     if (beanClass.isInterface()) {
-      LOGGER.info("Prepare to generate proxy for {} with JDK", beanClass.getName());
+      logger.info("Prepare to generate proxy for {} with JDK", beanClass.getName());
       ThriftClientInvocationHandler invocationHandler = new ThriftClientInvocationHandler();
       return (T) Proxy.newProxyInstance(beanClass.getClassLoader(), new Class<?>[]{beanClass}, invocationHandler);
     }
@@ -41,8 +45,4 @@ public class ThriftClientFactoryBean<T> implements FactoryBean<T>, InitializingB
     return true;
   }
 
-  @Override
-  public void afterPropertiesSet() throws Exception {
-    LOGGER.info("Succeed to instantiate an instance of ThriftClientFactoryBean: {}", this);
-  }
 }

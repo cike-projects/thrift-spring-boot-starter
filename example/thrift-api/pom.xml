@@ -1,61 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>example</artifactId>
-        <groupId>io.github.bug-wheels</groupId>
-        <version>0.2-SNAPSHOT</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>example</artifactId>
+    <groupId>io.github.bug-wheels</groupId>
+    <version>0.2-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>thrift-api</artifactId>
+  <artifactId>thrift-api</artifactId>
 
-    <properties>
-        <maven.deploy.skip>true</maven.deploy.skip>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
+  <properties>
+    <maven.deploy.skip>true</maven.deploy.skip>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
+  </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.apache.thrift</groupId>
-            <artifactId>libthrift</artifactId>
-        </dependency>
-    </dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.thrift</groupId>
+      <artifactId>libthrift</artifactId>
+    </dependency>
+  </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.github.zyndev</groupId>
-                <artifactId>thrift-maven-plugin</artifactId>
-                <version>0.1.15</version>
-                <configuration>
-                    <thriftExecutable>/usr/local/bin/thrift</thriftExecutable>
-                    <!--MacOS环境下用次配置-->
-                    <macThriftExecutable>/usr/local/bin/thrift</macThriftExecutable>
-                    <!--Windows环境下用此配置-->
-                    <winThriftExecutable>./thrift-0.9.3.exe</winThriftExecutable>
-                    <thriftSourceRoot>./src/main/thrift</thriftSourceRoot>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>thrift-sources</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>thrift-test-sources</id>
-                        <phase>generate-test-sources</phase>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+  <build>
+    <plugins>
+      <!--            <plugin>-->
+      <!--                <groupId>com.github.zyndev</groupId>-->
+      <!--                <artifactId>thrift-maven-plugin</artifactId>-->
+      <!--                <version>0.1.15</version>-->
+      <!--                <configuration>-->
+      <!--                    <thriftExecutable>/usr/local/bin/thrift</thriftExecutable>-->
+      <!--                    &lt;!&ndash;MacOS环境下用次配置&ndash;&gt;-->
+      <!--                    <macThriftExecutable>/usr/local/bin/thrift</macThriftExecutable>-->
+      <!--                    &lt;!&ndash;Windows环境下用此配置&ndash;&gt;-->
+      <!--                    <winThriftExecutable>./thrift-0.9.3.exe</winThriftExecutable>-->
+      <!--                    <thriftSourceRoot>./src/main/thrift</thriftSourceRoot>-->
+      <!--                </configuration>-->
+      <!--                <executions>-->
+      <!--                    <execution>-->
+      <!--                        <id>thrift-sources</id>-->
+      <!--                        <phase>generate-sources</phase>-->
+      <!--                        <goals>-->
+      <!--                            <goal>compile</goal>-->
+      <!--                        </goals>-->
+      <!--                    </execution>-->
+      <!--                    <execution>-->
+      <!--                        <id>thrift-test-sources</id>-->
+      <!--                        <phase>generate-test-sources</phase>-->
+      <!--                        <goals>-->
+      <!--                            <goal>testCompile</goal>-->
+      <!--                        </goals>-->
+      <!--                    </execution>-->
+      <!--                </executions>-->
+      <!--            </plugin>-->
+    </plugins>
+  </build>
 
 </project>

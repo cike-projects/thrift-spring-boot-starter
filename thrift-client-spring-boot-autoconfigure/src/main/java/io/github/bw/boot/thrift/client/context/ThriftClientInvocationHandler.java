@@ -42,6 +42,10 @@ public class ThriftClientInvocationHandler implements InvocationHandler {
    */
   @Override
   public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    if (isObjectOriginMethod(method)) {
+      return invokeObjectOriginMethod(proxy, method, args);
+    }
+
     ThriftClientProperties clientProperties = ThriftClientHolder.getClientProperties();
 
     ServiceNode serviceNode = clientProperties.getLoadBalance().getServices().stream()
@@ -64,4 +68,13 @@ public class ThriftClientInvocationHandler implements InvocationHandler {
     log.info("proxy:{}, method:{}, args:{}", proxy, method, args);
     return ReflectionUtils.invokeMethod(clientMethod, clientInstance, args);
   }
+
+  private Object invokeObjectOriginMethod(Object proxy, Method method, Object[] args) {
+    return this.toString();
+  }
+
+  private static boolean isObjectOriginMethod(Method method) {
+    return method.getName().equals("toString");
+  }
+
 }

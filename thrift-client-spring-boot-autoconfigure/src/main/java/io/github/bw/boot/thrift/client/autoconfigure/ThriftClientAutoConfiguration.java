@@ -1,6 +1,7 @@
 package io.github.bw.boot.thrift.client.autoconfigure;
 
 import io.github.bw.boot.thrift.client.ThriftClientBeanPostProcessor;
+import io.github.bw.boot.thrift.client.ThriftClientHolder;
 import io.github.bw.boot.thrift.client.config.ThriftClientProperties;
 import io.github.bw.boot.thrift.client.context.ThriftClientBeanScanProcessor;
 import org.apache.thrift.TServiceClient;
@@ -18,7 +19,9 @@ public class ThriftClientAutoConfiguration {
   @Bean
   @ConditionalOnMissingBean
   public ThriftClientProperties thriftClientProperties() {
-    return new ThriftClientProperties();
+    ThriftClientProperties thriftClientProperties = new ThriftClientProperties();
+    ThriftClientHolder.setClientProperties(thriftClientProperties);
+    return thriftClientProperties;
   }
 
   @Bean

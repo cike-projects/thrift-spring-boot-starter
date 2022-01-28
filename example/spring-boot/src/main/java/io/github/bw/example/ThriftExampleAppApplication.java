@@ -1,4 +1,4 @@
-package com.github.sbb.example;
+package io.github.bw.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

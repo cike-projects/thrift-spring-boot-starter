@@ -76,7 +76,7 @@ public interface SharedClient extends SharedService.Iface {
 **shared.thrift**
 
 ```
-namespace java com.github.sbb.example.shared
+namespace java io.github.bw.example.shared
 
 struct SharedStruct {
   1: i32 key
@@ -93,7 +93,7 @@ service SharedService {
 ```
 include "shared.thrift"
 
-namespace java com.github.sbb.example.tutorial
+namespace java io.github.bw.example.tutorial
 
 typedef i32 MyInteger
 
@@ -193,12 +193,12 @@ public class ThriftExampleAppApplication {
 SharedServiceImpl.java
 
 ```java
-package com.github.sbb.example.service;
+package io.github.bw.example.service;
 
-import com.github.sbb.boot.thrift.server.ThriftService;
-import com.github.sbb.example.component.RandomComponent;
-import com.github.sbb.example.shared.SharedService;
-import com.github.sbb.example.shared.SharedStruct;
+import io.github.bw.boot.thrift.server.ThriftService;
+import RandomComponent;
+import io.github.bw.example.shared.SharedService;
+import io.github.bw.example.shared.SharedStruct;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @ThriftService("SharedService") // 这里需要起个别名，Client 调用时，需要指定这个名字，如果不设置名字，则默认使用 classname
@@ -226,15 +226,15 @@ public class SharedServiceImpl implements SharedService.Iface {
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::        (v2.3.7.RELEASE)
 
-2022-01-22 16:11:50,493 DEBUG [main] com.github.sbb.example.ThriftExampleAppApplication [StartupInfoLogger.java:56] Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2022-01-22 16:11:50,493 INFO [main] com.github.sbb.example.ThriftExampleAppApplication [SpringApplication.java:651] No active profile set, falling back to default profiles: default
+2022-01-22 16:11:50,493 DEBUG [main] io.github.bw.example.ThriftExampleAppApplication [StartupInfoLogger.java:56] Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
+2022-01-22 16:11:50,493 INFO [main] io.github.bw.example.ThriftExampleAppApplication [SpringApplication.java:651] No active profile set, falling back to default profiles: default
 2022-01-22 16:11:51,264 INFO [main] org.apache.coyote.http11.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-9999"]
 2022-01-22 16:11:51,265 INFO [main] org.apache.catalina.core.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
 2022-01-22 16:11:51,265 INFO [main] org.apache.catalina.core.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/9.0.41]
 2022-01-22 16:11:51,324 INFO [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
 2022-01-22 16:11:51,596 INFO [main] org.apache.coyote.http11.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-9999"]
-2022-01-22 16:11:51,632 INFO [main] com.github.sbb.boot.thrift.server.server.THsHaThriftServer [THsHaThriftServer.java:42] Thrift Starting ["THsHaServer-10109"]
-2022-01-22 16:11:51,642 INFO [main] com.github.sbb.example.ThriftExampleAppApplication [StartupInfoLogger.java:61] Started ThriftExampleAppApplication in 1.522 seconds (JVM running for 2.022)
+2022-01-22 16:11:51,632 INFO [main] io.github.bw.boot.thrift.server.server.THsHaThriftServer [THsHaThriftServer.java:42] Thrift Starting ["THsHaServer-10109"]
+2022-01-22 16:11:51,642 INFO [main] io.github.bw.example.ThriftExampleAppApplication [StartupInfoLogger.java:61] Started ThriftExampleAppApplication in 1.522 seconds (JVM running for 2.022)
 ```
 
 日志中也可以显示 Thrift 启动的线程模型和端口号

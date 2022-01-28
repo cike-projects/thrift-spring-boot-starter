@@ -1,6 +1,6 @@
-package com.github.sbb.example.component;
+package io.github.bw.example.component;
 
-import com.github.sbb.example.util.RandomStringUtil;
+import io.github.bw.example.util.RandomStringUtil;
 import org.springframework.stereotype.Component;
 
 @Component

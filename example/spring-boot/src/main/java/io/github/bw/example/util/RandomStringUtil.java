@@ -1,4 +1,4 @@
-package com.github.sbb.example.util;
+package io.github.bw.example.util;
 
 
 import java.util.Random;

@@ -47,8 +47,9 @@ public class ClassPathThriftClientScanner extends ClassPathBeanDefinitionScanner
   @SneakyThrows
   private void processBeanDefinitions(Set<BeanDefinitionHolder> beanDefinitions) {
     for (BeanDefinitionHolder beanDefinitionHolder : beanDefinitions) {
-      log.info("Thrift beanName: {}", beanDefinitionHolder.getBeanName());
       GenericBeanDefinition definition = (GenericBeanDefinition) beanDefinitionHolder.getBeanDefinition();
+      log.info("Thrift Client beanName: {}, BeanClassName: {}", beanDefinitionHolder.getBeanName(),
+          definition.getBeanClassName());
       Class<?> beanClass = Class.forName(definition.getBeanClassName());
 
       ThriftClient thriftClient = AnnotationUtils.findAnnotation(beanClass, ThriftClient.class);
@@ -59,9 +60,6 @@ public class ClassPathThriftClientScanner extends ClassPathBeanDefinitionScanner
       constructorArgumentValues.addGenericArgumentValue(thriftClient.name());
       constructorArgumentValues.addGenericArgumentValue(beanClass);
 
-      definition.getPropertyValues().addPropertyValue("beanClass", beanClass);
-      definition.getPropertyValues().addPropertyValue("serviceName", thriftClient.name());
-      definition.getPropertyValues().addPropertyValue("serviceId", thriftClient.serviceId());
       definition.setBeanClass(ThriftClientFactoryBean.class);
     }
   }

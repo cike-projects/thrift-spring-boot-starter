@@ -72,9 +72,6 @@ public class ClassPathThriftClientScanner extends ClassPathBeanDefinitionScanner
         && Arrays.stream(metadata.getInterfaceNames()).anyMatch(it -> it.endsWith("face"));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected boolean checkCandidate(String beanName, BeanDefinition beanDefinition) {
     if (super.checkCandidate(beanName, beanDefinition)) {

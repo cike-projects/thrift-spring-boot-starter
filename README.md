@@ -3,6 +3,7 @@
 ![轮子](https://img.shields.io/badge/wheels-%E8%BD%AE%E5%AD%90-red)
 ![GitHub](https://img.shields.io/github/license/bug-wheels/thrift-spring-boot-starter)
 [![Java CI with Maven](https://github.com/bug-wheels/thrift-spring-boot-starter/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/bug-wheels/thrift-spring-boot-starter/actions/workflows/maven.yml)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.bug-wheels/thrift-spring-boot-starter.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22io.github.bug-wheels%22%20AND%20a:%22thrift-spring-boot-starter%22)
 
 Spring Boot starter module for Thrift framework.
 

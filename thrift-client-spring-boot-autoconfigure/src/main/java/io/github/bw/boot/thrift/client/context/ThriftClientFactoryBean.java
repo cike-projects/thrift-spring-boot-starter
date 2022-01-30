@@ -32,6 +32,9 @@ public class ThriftClientFactoryBean<T> implements FactoryBean<T> {
     if (beanClass.isInterface()) {
       logger.info("Prepare to generate proxy for {} with JDK", beanClass.getName());
       // 获取到对应 client 的 class
+      // 因为原始的类型是接口，这里通过 JDK 动态代理的方式生成代理对象
+      // 因为生成的代理对象要处理业务逻辑，所以把注解包含的信息和要真正代理的 Thrift Client 的 class 处理一下
+      // 最终处理的逻辑在 ThriftClientInvocationHandler 的 invoke 里面
       ThriftClientInvocationHandler invocationHandler = new ThriftClientInvocationHandler(serviceId, serviceName,
           beanClass, getClientClass(beanClass));
       return (T) Proxy.newProxyInstance(beanClass.getClassLoader(), new Class<?>[]{beanClass}, invocationHandler);

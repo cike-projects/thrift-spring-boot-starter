@@ -1,8 +1,9 @@
 package io.github.bw.boot.thrift.client.context;
 
-import io.github.bw.boot.thrift.client.ThriftClientHolder;
-import io.github.bw.boot.thrift.client.config.ServiceNode;
-import io.github.bw.boot.thrift.client.config.ThriftClientProperties;
+import io.github.bw.boot.thrift.client.loadbalancer.FixedInstanceDiscovery;
+import io.github.bw.boot.thrift.client.loadbalancer.IRule;
+import io.github.bw.boot.thrift.client.loadbalancer.RandomRule;
+import io.github.bw.boot.thrift.client.loadbalancer.ServiceInstance;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -23,12 +24,15 @@ public class ThriftClientInvocationHandler implements InvocationHandler {
   private String serviceName;
   private Class<?> beanClass;
   private final Class<?> clientClass;
+  private IRule iRule;
 
   public ThriftClientInvocationHandler(String serviceId, String serviceName, Class<?> beanClass, Class<?> clientClass) {
     this.serviceId = Objects.requireNonNull(serviceId);
     this.serviceName = Objects.requireNonNull(serviceName);
     this.beanClass = Objects.requireNonNull(beanClass);
     this.clientClass = Objects.requireNonNull(clientClass);
+    FixedInstanceDiscovery discovery = new FixedInstanceDiscovery();
+    this.iRule = new RandomRule(discovery);
   }
 
   /**
@@ -42,16 +46,13 @@ public class ThriftClientInvocationHandler implements InvocationHandler {
    */
   @Override
   public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-    ThriftClientProperties clientProperties = ThriftClientHolder.getClientProperties();
+    if (isObjectOriginMethod(method)) {
+      return invokeObjectOriginMethod(proxy, method, args);
+    }
 
-    ServiceNode serviceNode = clientProperties.getLoadBalance().getServices().stream()
-        .filter(it -> it.getName().equals(serviceId))
-        .findFirst()
-        .orElseThrow(() -> new IllegalStateException("No find available server for " + serviceId));
+    ServiceInstance serviceInstance = iRule.choose(serviceId);
 
-    String targetHost = serviceNode.getAddress().get(0);
-    String[] hostInfo = targetHost.split(":");
-    TTransport transport = new TFramedTransport(new TSocket(hostInfo[0], Integer.parseInt(hostInfo[1])));
+    TTransport transport = new TFramedTransport(new TSocket(serviceInstance.getHost(), serviceInstance.getPort()));
     TProtocol protocol = new TCompactProtocol(transport);
 
     TMultiplexedProtocol targetMultiplexedProtocol = new TMultiplexedProtocol(protocol, serviceName);
@@ -63,5 +64,13 @@ public class ThriftClientInvocationHandler implements InvocationHandler {
     transport.open();
     log.info("proxy:{}, method:{}, args:{}", proxy, method, args);
     return ReflectionUtils.invokeMethod(clientMethod, clientInstance, args);
+  }
+
+  private Object invokeObjectOriginMethod(Object proxy, Method method, Object[] args) {
+    return this.toString();
+  }
+
+  private static boolean isObjectOriginMethod(Method method) {
+    return method.getName().equals("toString");
   }
 }

@@ -1,6 +1,5 @@
 package io.github.bw.boot.thrift.client.context;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -10,7 +9,6 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.AnnotationBeanNameGenerator;
 import org.springframework.context.annotation.ScopedProxyMode;
 
-@Slf4j
 public class ThriftClientBeanScanProcessor implements ApplicationContextAware, BeanFactoryPostProcessor {
 
   private ApplicationContext applicationContext;

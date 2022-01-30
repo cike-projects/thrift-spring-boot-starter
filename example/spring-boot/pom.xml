@@ -5,7 +5,7 @@
   <parent>
     <artifactId>example</artifactId>
     <groupId>io.github.bug-wheels</groupId>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.2</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
@@ -43,6 +43,13 @@
   <build>
     <finalName>zeus-web-console</finalName>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>

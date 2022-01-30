@@ -5,7 +5,7 @@
   <parent>
     <artifactId>thrift-spring-boot-starter</artifactId>
     <groupId>io.github.bug-wheels</groupId>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.2</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
@@ -29,12 +29,24 @@
     </dependency>
   </dependencies>
 
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>io.github.bug-wheels</groupId>
         <artifactId>thrift-api</artifactId>
-        <version>0.2-SNAPSHOT</version>
+        <version>0.2</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

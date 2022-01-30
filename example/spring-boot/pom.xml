@@ -41,7 +41,6 @@
   </dependencies>
 
   <build>
-    <finalName>zeus-web-console</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

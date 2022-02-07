@@ -5,7 +5,7 @@
   <parent>
     <artifactId>thrift-spring-boot-starter</artifactId>
     <groupId>io.github.bug-wheels</groupId>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.3-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
@@ -34,7 +34,7 @@
       <dependency>
         <groupId>io.github.bug-wheels</groupId>
         <artifactId>thrift-api</artifactId>
-        <version>0.2-SNAPSHOT</version>
+        <version>0.3-SNAPSHOT</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

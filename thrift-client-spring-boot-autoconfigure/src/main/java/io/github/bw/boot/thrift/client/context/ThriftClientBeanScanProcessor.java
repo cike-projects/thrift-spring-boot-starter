@@ -1,6 +1,7 @@
 package io.github.bw.boot.thrift.client.context;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -12,6 +13,9 @@ import org.springframework.context.annotation.ScopedProxyMode;
 public class ThriftClientBeanScanProcessor implements ApplicationContextAware, BeanFactoryPostProcessor {
 
   private ApplicationContext applicationContext;
+
+  @Value("${thrift.client.basePackages:}")
+  private String clientBasePackages;
 
   @Override
   public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -25,6 +29,6 @@ public class ThriftClientBeanScanProcessor implements ApplicationContextAware, B
     beanScanner.setResourceLoader(applicationContext);
     beanScanner.setBeanNameGenerator(new AnnotationBeanNameGenerator());
     beanScanner.setScopedProxyMode(ScopedProxyMode.INTERFACES);
-    beanScanner.scan("");
+    beanScanner.scan("io.github.bw.example");
   }
 }

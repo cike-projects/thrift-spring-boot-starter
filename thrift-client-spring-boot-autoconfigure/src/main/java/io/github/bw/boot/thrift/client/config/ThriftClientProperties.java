@@ -17,6 +17,8 @@ public class ThriftClientProperties {
 
   private boolean enabled = true;
 
+  private String basePackages = "";
+
   @Setter
   @Getter
   @ToString

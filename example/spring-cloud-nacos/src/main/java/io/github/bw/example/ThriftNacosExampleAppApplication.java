@@ -6,9 +6,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @EnableDiscoveryClient
 @SpringBootApplication
-public class ThriftExampleAppApplication {
+public class ThriftNacosExampleAppApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(ThriftExampleAppApplication.class, args);
+    SpringApplication.run(ThriftNacosExampleAppApplication.class, args);
   }
 }

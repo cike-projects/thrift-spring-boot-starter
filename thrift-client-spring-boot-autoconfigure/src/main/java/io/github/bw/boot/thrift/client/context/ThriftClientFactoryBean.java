@@ -9,6 +9,7 @@ import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.context.ApplicationContext;
 
 @Setter
 @Getter
@@ -19,11 +20,14 @@ public class ThriftClientFactoryBean<T> implements FactoryBean<T> {
   private Class<?> beanClass;
   private String serviceId;
   private String serviceName;
+  private ApplicationContext applicationContext;
 
-  public ThriftClientFactoryBean(String serviceId, String serviceName, Class<?> beanClass) {
+  public ThriftClientFactoryBean(String serviceId, String serviceName, Class<?> beanClass,
+      ApplicationContext applicationContext) {
     this.beanClass = beanClass;
     this.serviceId = serviceId;
     this.serviceName = serviceName;
+    this.applicationContext = applicationContext;
   }
 
   @Override
@@ -36,7 +40,7 @@ public class ThriftClientFactoryBean<T> implements FactoryBean<T> {
       // 因为生成的代理对象要处理业务逻辑，所以把注解包含的信息和要真正代理的 Thrift Client 的 class 处理一下
       // 最终处理的逻辑在 ThriftClientInvocationHandler 的 invoke 里面
       ThriftClientInvocationHandler invocationHandler = new ThriftClientInvocationHandler(serviceId, serviceName,
-          beanClass, getClientClass(beanClass));
+          getClientClass(beanClass), applicationContext);
       return (T) Proxy.newProxyInstance(beanClass.getClassLoader(), new Class<?>[]{beanClass}, invocationHandler);
     }
     return null;

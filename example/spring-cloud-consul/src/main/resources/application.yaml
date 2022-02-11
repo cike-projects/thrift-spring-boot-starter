@@ -12,7 +12,7 @@ thrift:
   client:
     basePackages: io.github.bw.example
     loadBalance:
-      enabled: false
+      enabled: true
       services:
         - name: spring-boot-thrift-server
           address:

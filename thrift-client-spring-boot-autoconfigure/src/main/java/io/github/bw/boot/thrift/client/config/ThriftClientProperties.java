@@ -24,7 +24,7 @@ public class ThriftClientProperties {
   @ToString
   public static class ThriftClientLoadBalance {
 
-    private boolean enabled = false;
+    private boolean enabled = true;
 
     private List<ServiceNode> services;
   }

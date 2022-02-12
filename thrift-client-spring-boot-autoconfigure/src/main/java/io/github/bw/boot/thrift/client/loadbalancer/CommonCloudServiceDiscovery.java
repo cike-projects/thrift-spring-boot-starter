@@ -22,7 +22,8 @@ public class CommonCloudServiceDiscovery implements ServiceDiscovery {
       return new ArrayList<>();
     }
 
-    return instances.stream().map(it -> new DefaultServiceInstance(it.getHost(), it.getPort()))
+    return instances.stream().map(
+            it -> new DefaultServiceInstance(it.getHost(), Integer.parseInt(it.getMetadata().get("THRIFT_CLOUD_PORT"))))
         .collect(Collectors.toList());
   }
 }

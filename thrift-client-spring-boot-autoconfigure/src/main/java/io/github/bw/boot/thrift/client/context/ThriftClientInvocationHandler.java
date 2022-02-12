@@ -29,21 +29,18 @@ public class ThriftClientInvocationHandler implements InvocationHandler {
   private String serviceName;
   private final Class<?> clientClass;
   private IRule iRule;
+  private ApplicationContext applicationContext;
 
-  public ThriftClientInvocationHandler(String serviceId, String serviceName, Class<?> clientClass,
-      ApplicationContext applicationContext) {
-    this.serviceId = Objects.requireNonNull(serviceId);
-    this.serviceName = Objects.requireNonNull(serviceName);
-    this.clientClass = Objects.requireNonNull(clientClass);
-
+  public void init() {
     ServiceDiscovery discovery = null;
 
     ThriftClientLoadBalance loadBalance = ThriftClientHolder.getClientProperties().getLoadBalance();
 
     boolean isEnabledDiscovery = loadBalance != null && loadBalance.isEnabled();
 
-    boolean hasInstances = loadBalance != null && loadBalance.getServices().stream()
-        .anyMatch(it -> it.getName().equals(serviceId) && !CollectionUtils.isEmpty(it.getAddress()));
+    boolean hasInstances =
+        loadBalance != null && loadBalance.getServices() != null && loadBalance.getServices().stream()
+            .anyMatch(it -> it.getName().equals(serviceId) && !CollectionUtils.isEmpty(it.getAddress()));
 
     if (hasInstances) {
       // 配置文件中手动设置了地址
@@ -53,13 +50,23 @@ public class ThriftClientInvocationHandler implements InvocationHandler {
       try {
         discovery = applicationContext.getBean(ServiceDiscovery.class);
       } catch (Exception e) {
-        log.error("无法使用服务发现");
+        log.error("Thrift {} 无法使用服务发现", serviceId, e);
+        throw e;
       }
     } else {
       // 配置文件中即没有手动配置，也没有开发服务发现
       throw new RuntimeException("Thrift Client " + serviceId + " 配置文件中即没有手动配置，也没有无法服务发现");
     }
     this.iRule = new RandomRule(discovery);
+  }
+
+  public ThriftClientInvocationHandler(String serviceId, String serviceName, Class<?> clientClass,
+      ApplicationContext applicationContext) {
+    this.serviceId = Objects.requireNonNull(serviceId);
+    this.serviceName = Objects.requireNonNull(serviceName);
+    this.clientClass = Objects.requireNonNull(clientClass);
+    this.applicationContext = applicationContext;
+    ThriftClientHolder.registerPostProcessor(this::init);
   }
 
   /**

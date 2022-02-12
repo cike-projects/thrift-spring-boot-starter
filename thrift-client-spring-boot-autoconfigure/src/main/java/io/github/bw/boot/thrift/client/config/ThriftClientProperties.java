@@ -13,7 +13,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("thrift.client")
 public class ThriftClientProperties {
 
-  private ThriftClientLoadBalance loadBalance;
+  private ThriftClientLoadBalance loadBalance = new ThriftClientLoadBalance();
 
   private boolean enabled = true;
 

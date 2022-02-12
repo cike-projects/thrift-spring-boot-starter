@@ -2,6 +2,7 @@ package io.github.bw.boot.thrift.client.autoconfigure;
 
 import io.github.bw.boot.thrift.client.ThriftClientHolder;
 import io.github.bw.boot.thrift.client.config.ThriftClientProperties;
+import io.github.bw.boot.thrift.client.context.ThriftPostListener;
 import org.apache.thrift.TServiceClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -15,6 +16,12 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties(ThriftClientProperties.class)
 @ConditionalOnProperty(prefix = "thrift.client", value = "enabled", matchIfMissing = true)
 public class ThriftClientAutoConfiguration {
+
+  @Bean
+  @ConditionalOnMissingBean
+  public ThriftPostListener thriftPostListener() {
+    return new ThriftPostListener();
+  }
 
   @Bean
   @ConditionalOnMissingBean

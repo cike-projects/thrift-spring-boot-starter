@@ -13,16 +13,18 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("thrift.client")
 public class ThriftClientProperties {
 
-  private ThriftClientLoadBalance loadBalance;
+  private ThriftClientLoadBalance loadBalance = new ThriftClientLoadBalance();
 
   private boolean enabled = true;
+
+  private String basePackages = "";
 
   @Setter
   @Getter
   @ToString
   public static class ThriftClientLoadBalance {
 
-    private boolean enabled = false;
+    private boolean enabled = true;
 
     private List<ServiceNode> services;
   }

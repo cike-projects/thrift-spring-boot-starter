@@ -1,0 +1,22 @@
+server:
+  port: 9999
+
+spring:
+  application:
+    name: spring-boot-thrift-server
+  cloud:
+    nacos:
+      discovery:
+        namespace: b4575b2f-bfbf-45fa-9c6c-0b03ec751aa4
+        server-addr:
+        group: DEFAULT_GROUP
+        username: nacos
+        password: nacos
+
+thrift:
+  server:
+    port: 10109
+    serverMode: THsHaServer
+
+logging:
+  config: classpath:logback-spring-dev.xml

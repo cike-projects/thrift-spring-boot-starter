@@ -11,6 +11,7 @@ import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.config.ConstructorArgumentValues;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.type.AnnotationMetadata;
@@ -19,8 +20,11 @@ import org.springframework.core.type.filter.AnnotationTypeFilter;
 @Slf4j
 public class ClassPathThriftClientScanner extends ClassPathBeanDefinitionScanner {
 
-  public ClassPathThriftClientScanner(BeanDefinitionRegistry registry) {
+  private ApplicationContext applicationContext;
+
+  public ClassPathThriftClientScanner(BeanDefinitionRegistry registry, ApplicationContext applicationContext) {
     super(registry);
+    this.applicationContext = applicationContext;
   }
 
   @Override
@@ -76,6 +80,7 @@ public class ClassPathThriftClientScanner extends ClassPathBeanDefinitionScanner
       constructorArgumentValues.addGenericArgumentValue(thriftClient.serviceId());
       constructorArgumentValues.addGenericArgumentValue(thriftClient.name());
       constructorArgumentValues.addGenericArgumentValue(beanClass);
+      constructorArgumentValues.addGenericArgumentValue(applicationContext);
 
       definition.setBeanClass(ThriftClientFactoryBean.class);
     }

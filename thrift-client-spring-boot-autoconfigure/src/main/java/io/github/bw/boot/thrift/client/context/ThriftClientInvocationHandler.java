@@ -1,8 +1,11 @@
 package io.github.bw.boot.thrift.client.context;
 
+import io.github.bw.boot.thrift.client.ThriftClientHolder;
+import io.github.bw.boot.thrift.client.config.ThriftClientProperties.ThriftClientLoadBalance;
 import io.github.bw.boot.thrift.client.loadbalancer.FixedInstanceDiscovery;
 import io.github.bw.boot.thrift.client.loadbalancer.IRule;
 import io.github.bw.boot.thrift.client.loadbalancer.RandomRule;
+import io.github.bw.boot.thrift.client.loadbalancer.ServiceDiscovery;
 import io.github.bw.boot.thrift.client.loadbalancer.ServiceInstance;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;
@@ -15,6 +18,8 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TFramedTransport;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
+import org.springframework.context.ApplicationContext;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.ReflectionUtils;
 
 @Slf4j
@@ -22,17 +27,46 @@ public class ThriftClientInvocationHandler implements InvocationHandler {
 
   private final String serviceId;
   private String serviceName;
-  private Class<?> beanClass;
   private final Class<?> clientClass;
   private IRule iRule;
+  private ApplicationContext applicationContext;
 
-  public ThriftClientInvocationHandler(String serviceId, String serviceName, Class<?> beanClass, Class<?> clientClass) {
+  public void init() {
+    ServiceDiscovery discovery = null;
+
+    ThriftClientLoadBalance loadBalance = ThriftClientHolder.getClientProperties().getLoadBalance();
+
+    boolean isEnabledDiscovery = loadBalance != null && loadBalance.isEnabled();
+
+    boolean hasInstances =
+        loadBalance != null && loadBalance.getServices() != null && loadBalance.getServices().stream()
+            .anyMatch(it -> it.getName().equals(serviceId) && !CollectionUtils.isEmpty(it.getAddress()));
+
+    if (hasInstances) {
+      // 配置文件中手动设置了地址
+      discovery = new FixedInstanceDiscovery();
+    } else if (isEnabledDiscovery) {
+      // 配置文件中未手动配置，但开启了服务发现
+      try {
+        discovery = applicationContext.getBean(ServiceDiscovery.class);
+      } catch (Exception e) {
+        log.error("Thrift {} 无法使用服务发现", serviceId, e);
+        throw e;
+      }
+    } else {
+      // 配置文件中即没有手动配置，也没有开发服务发现
+      throw new RuntimeException("Thrift Client " + serviceId + " 配置文件中即没有手动配置，也没有无法服务发现");
+    }
+    this.iRule = new RandomRule(discovery);
+  }
+
+  public ThriftClientInvocationHandler(String serviceId, String serviceName, Class<?> clientClass,
+      ApplicationContext applicationContext) {
     this.serviceId = Objects.requireNonNull(serviceId);
     this.serviceName = Objects.requireNonNull(serviceName);
-    this.beanClass = Objects.requireNonNull(beanClass);
     this.clientClass = Objects.requireNonNull(clientClass);
-    FixedInstanceDiscovery discovery = new FixedInstanceDiscovery();
-    this.iRule = new RandomRule(discovery);
+    this.applicationContext = applicationContext;
+    ThriftClientHolder.registerPostProcessor(this::init);
   }
 
   /**

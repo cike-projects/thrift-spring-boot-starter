@@ -20,7 +20,7 @@ class ThriftClientInvocationHandlerTest {
     ThriftClient thriftClient = AnnotationUtils.findAnnotation(beanClass, ThriftClient.class);
 
     ThriftClientFactoryBean<SharedClient> factoryBean = new ThriftClientFactoryBean<>(
-        thriftClient.serviceId(), thriftClient.name(), beanClass);
+        thriftClient.serviceId(), thriftClient.name(), beanClass, null);
 
     SharedClient client = factoryBean.getObject();
     Assertions.assertNotNull(client);

@@ -15,7 +15,7 @@ Spring Boot starter module for Thrift framework.
 
 本项目主要为了提高 Thrift 在 Spring Boot 和 Spring Cloud 中的使用体验，简化其配置方式，提供开箱即用的体验，在 Spring Cloud 的环境中提供注册发现和负载均衡功能模块。
 
-![apache thrift](./docs/apache thrift.png)
+![apache thrift](./docs/apache_thrift.png)
 
 **服务端：**
 

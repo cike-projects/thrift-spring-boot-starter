@@ -71,6 +71,8 @@ public interface SharedClient extends SharedService.Iface {
 
 ## 快速开始
 
+详细用法见 [Spring Boot](./docs/spring_boot.md) |  [Spring Cloud](./docs/spring_cloud.md)
+
 > 以下示例未做说明均在 Spring Boot 项目中，而非单纯的 Spring
 
 ### Thrift IDL

@@ -50,11 +50,14 @@ public class SharedServiceImpl implements SharedService.Iface {
 **示例代码**
 
 ```java
+
 @ThriftClient(name = "SharedService", serviceId = "spring-boot-thrift-server", fallback = SharedClientFallback.class)
 public interface SharedClient extends SharedService.Iface {
 
 }
 ```
+
+> 详细用法查看 wiki 或者 https://bug-wheels.github.io/
 
 ## 版本支持
 

@@ -53,6 +53,10 @@
       <timezone>+8</timezone>
     </developer>
   </developers>
+  <organization>
+    <name>Bug-Wheels Group</name>
+    <url>https://github.com/bug-wheels</url>
+  </organization>
 
   <distributionManagement>
     <snapshotRepository>

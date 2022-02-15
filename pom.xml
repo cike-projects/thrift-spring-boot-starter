@@ -73,6 +73,7 @@
     <maven.compiler.source>8</maven.compiler.source>
     <maven.compiler.target>8</maven.compiler.target>
 
+    <maven.deploy.version>2.8.2</maven.deploy.version>
     <org.apache.thrift.libthrift.version>0.9.3</org.apache.thrift.libthrift.version>
     <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
     <spring-cloud.version>Hoxton.SR9</spring-cloud.version>

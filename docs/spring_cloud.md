@@ -20,21 +20,21 @@
 
 <dependency>
   <groupId>io.github.bug-wheels</groupId>
-  <artifactId>thrift-server-spring-boot-starter</artifactId>
-  <version>0.2</version>
+   <artifactId>thrift-server-spring-boot-starter</artifactId>
+   <version>0.3</version>
 </dependency>
 ```
 
 **Gradle Groovy DSL**
 
 ```groovy
-implementation 'io.github.bug-wheels:thrift-server-spring-boot-starter:0.2'
+implementation 'io.github.bug-wheels:thrift-server-spring-boot-starter:0.3'
 ```
 
 **Gradle Kotlin DSL**
 
 ```Kotlin
-implementation("io.github.bug-wheels:thrift-server-spring-boot-starter:0.2")
+implementation("io.github.bug-wheels:thrift-server-spring-boot-starter:0.3")
 ```
 
 最新版本查看 [maven:thrift-server-spring-boot-starter](https://search.maven.org/artifact/io.github.bug-wheels/thrift-server-spring-boot-starter)
@@ -101,21 +101,21 @@ thrift:
 
 <dependency>
   <groupId>io.github.bug-wheels</groupId>
-  <artifactId>thrift-client-spring-boot-starter</artifactId>
-  <version>0.2</version>
+   <artifactId>thrift-client-spring-boot-starter</artifactId>
+   <version>0.3</version>
 </dependency>
 ```
 
 **Gradle Groovy DSL**
 
 ```groovy
-implementation 'io.github.bug-wheels:thrift-client-spring-boot-starter:0.2'
+implementation 'io.github.bug-wheels:thrift-client-spring-boot-starter:0.3'
 ```
 
 **Gradle Kotlin DSL**
 
  ```kotlin
- implementation("io.github.bug-wheels:thrift-client-spring-boot-starter:0.2")
+ implementation("io.github.bug-wheels:thrift-client-spring-boot-starter:0.3")
  ```
 
 最新版本查看 [Maven: thrift-client-spring-boot-starter](https://search.maven.org/artifact/io.github.bug-wheels/thrift-client-spring-boot-starter)

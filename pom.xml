@@ -14,7 +14,7 @@
 
   <groupId>io.github.bug-wheels</groupId>
   <artifactId>thrift-spring-boot-starter</artifactId>
-  <version>0.3-SNAPSHOT</version>
+  <version>0.3</version>
   <name>thrift-spring-boot-starter</name>
   <url>https://github.com/bug-wheels/thrift-spring-boot-starter</url>
   <description>thrift-spring-boot-starter</description>
@@ -104,28 +104,28 @@
           </execution>
         </executions>
       </plugin>
-      <!--      <plugin>-->
-      <!--        <groupId>org.apache.maven.plugins</groupId>-->
-      <!--        <artifactId>maven-javadoc-plugin</artifactId>-->
-      <!--        <version>2.9.1</version>-->
-      <!--        <configuration>-->
-      <!--          &lt;!&ndash; jdk1.8要加上，1.7要去掉，否则会报错 &ndash;&gt;-->
-      <!--          <additionalJOptions>-->
-      <!--            <additionalJOption>-Xdoclint:none</additionalJOption>-->
-      <!--          </additionalJOptions>-->
-      <!--          <javadocExecutable>/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/bin/javadoc-->
-      <!--          </javadocExecutable>-->
-
-      <!--        </configuration>-->
-      <!--        <executions>-->
-      <!--          <execution>-->
-      <!--            <id>attach-javadocs</id>-->
-      <!--            <goals>-->
-      <!--              <goal>jar</goal>-->
-      <!--            </goals>-->
-      <!--          </execution>-->
-      <!--        </executions>-->
-      <!--      </plugin>-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9.1</version>
+        <configuration>
+          <!-- jdk1.8要加上，1.7要去掉，否则会报错 -->
+          <additionalJOptions>
+            <additionalJOption>-Xdoclint:none</additionalJOption>
+          </additionalJOptions>
+          <javadocExecutable>/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/bin/javadoc
+          </javadocExecutable>
+          <!---->
+        </configuration>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
